@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Players</string>
+    <string name="tab_player_title">My players</string>
+    <string name="tab_favorites_title">Favorites</string>
+    <string name="activity_new_player">New player</string>
+    <string name="facebook_model">www.facebook.fr/</string>
+    <string name="about_me">À propos de moi</string>
+    <string name="imageDetails">detailjoueur</string>
+</resources>
