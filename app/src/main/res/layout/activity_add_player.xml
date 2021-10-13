@@ -23,15 +23,14 @@
             android:layout_marginTop="40dp"
             android:layout_gravity="center_horizontal"/>
 
-        <!--suppress AndroidUnresolvableTag -->
-        <com.google.Android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/nameLyt"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"/>
 
-        <TextInputLayout
+        <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,46 +38,45 @@
                 android:hint="Name"
                 android:inputType="textPersonName" />
 
-        <TextInputLayout
+        <EditText
             android:id="@+id/phoneNumberLyt"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp">
+            android:layout_marginTop="18dp"/>
 
-            <TextInputEditText
+            <TextView
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Phone number"
                 android:inputType="phone" />
-        </TextInputLayout>
 
-        <TextInputLayout
+        <EditText
             android:id="@+id/addressLyt"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp">
+            android:layout_marginTop="18dp"/>
 
-            <TextInputEditText
+            <TextView
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Address"
                 android:inputType="text" />
-        </TextInputLayout>
 
-        <TextInputLayout
+
+        <EditText
             android:id="@+id/aboutMeLyt"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp">
+            android:layout_marginTop="18dp"/>
 
-            <TextInputEditText
+            <TextView
                 android:id="@+id/aboutMe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +85,7 @@
                 android:ems="10"
                 android:hint="About me"
                 android:inputType="textMultiLine" />
-        </TextInputLayout>
+
 
         <Button
             android:id="@+id/create"

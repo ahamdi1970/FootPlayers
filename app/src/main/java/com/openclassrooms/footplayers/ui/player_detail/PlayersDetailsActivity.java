@@ -7,47 +7,56 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.openclassrooms.footplayers.R;
+import com.openclassrooms.footplayers.databinding.ActivityPlayersDetailsBinding;
 import com.openclassrooms.footplayers.di.DI;
 import com.openclassrooms.footplayers.model.Player;
 import com.openclassrooms.footplayers.service.PlayerApiService;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class PlayersDetailsActivity extends AppCompatActivity {
 
-    @BindView(R.id.image_details)
     public ImageView imageDetails;
-    @BindView(R.id.name_in_image)
+
     public TextView nameImage;
-    @BindView(R.id.name_in_card)
+
     public TextView nameCard;
-    @BindView(R.id.localisation_txt)
+
     public TextView localisation;
-    @BindView(R.id.phone_number)
+
     public TextView phoneNumber;
-    @BindView(R.id.about_me_details)
+
     public TextView aboutMe;
-    @BindView(R.id.web_address)
+
     public TextView facebookTextView;
 
-    @BindView(R.id.FAB_detail)
-    public FloatingActionButton mFab;
-    @BindView(R.id.toolbar)
+
+    public AppCompatButton mFab;
+
     public Toolbar mToolbar;
 
     private Player mPlayer;
     private PlayerApiService mApiService;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_players_details);
-        ButterKnife.bind(this);
+        @NonNull ActivityPlayersDetailsBinding binding = ActivityPlayersDetailsBinding.inflate ( this.getLayoutInflater () );
+        setContentView(binding.getRoot ());
+
+        imageDetails = binding.imageDetails;
+        nameImage = binding.nameInImage;
+        nameCard = binding.nameInCard;
+        localisation = binding.localisationTxt;
+        phoneNumber = binding.phoneNumber;
+        aboutMe = binding.aboutMe;
+        facebookTextView = binding.webAddress;
+        mFab = binding.FABDetail;
+        mToolbar = binding.toolbar;
 
         mApiService = DI.getPlayerApiService ();
 
@@ -83,7 +92,7 @@ public class PlayersDetailsActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        mFab.setOnClickListener(new View.OnClickListener() {
+             mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeFavoriteState();
@@ -98,7 +107,7 @@ public class PlayersDetailsActivity extends AppCompatActivity {
     }
 
     private void fabColor() {
-        mFab.setColorFilter((mPlayer.isFavorite()) ? Color.YELLOW : Color.GRAY);
+        mFab.setTextColor ((mPlayer.isFavorite()) ? Color.YELLOW : Color.GRAY);
     }
 
 }

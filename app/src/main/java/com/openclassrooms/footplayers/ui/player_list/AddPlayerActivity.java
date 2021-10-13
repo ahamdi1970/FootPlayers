@@ -5,50 +5,71 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.openclassrooms.footplayers.R;
+import com.openclassrooms.footplayers.databinding.ActivityAddPlayerBinding;
+import com.openclassrooms.footplayers.databinding.ActivityPlayersDetailsBinding;
 import com.openclassrooms.footplayers.di.DI;
 import com.openclassrooms.footplayers.model.Player;
 import com.openclassrooms.footplayers.service.PlayerApiService;
 
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddPlayerActivity extends AppCompatActivity {
 
-    @BindView(R.id.avatar)
+
     ImageView avatar;
-    @BindView(R.id.nameLyt)
-    TextInputLayout nameInput;
-    @BindView(R.id.phoneNumberLyt)
-    TextInputLayout phoneInput;
-    @BindView(R.id.addressLyt)
-    TextInputLayout addressInput;
-    @BindView(R.id.aboutMeLyt)
-    TextInputLayout aboutMeInput;
-    @BindView(R.id.create)
-    MaterialButton addButton;
+    EditText nameInput;
+    EditText phoneInput;
+    EditText addressInput;
+    EditText aboutMeInput;
+    Button addButton;
 
     private PlayerApiService mApiService;
     private String mPlayerImage;
     private boolean favorite;
 
+    // calling binding class for activity_main.xml
+    // which is generated automatically.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_player);
-        ButterKnife.bind(this);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // calling binding class for activity_add_player.xml
+        // which is generated automatically.
+        // inflating our xml layout in our activity
+        ActivityAddPlayerBinding binding = ActivityAddPlayerBinding.inflate ( this.getLayoutInflater () );
+
+        // getting our root layout in our view.
+        View view = binding.getRoot();
+
+        // below line is to set
+        // Content view for our layout.
+        setContentView(view);
+
+        Objects.requireNonNull ( getSupportActionBar () ).setDisplayHomeAsUpEnabled(true);
+
         mApiService = DI.getPlayerApiService ();
+        avatar = binding.avatar;
+        nameInput = binding.nameLyt;//findViewById ( R.id.nameLyt );
+        phoneInput = binding.phoneNumberLyt;
+        addressInput = binding.addressLyt;
+        aboutMeInput = binding.aboutMeLyt;
+        addButton = binding.create;
         init();
     }
 
@@ -67,7 +88,7 @@ public class AddPlayerActivity extends AppCompatActivity {
         mPlayerImage = randomImage();
         Glide.with(this).load(mPlayerImage).placeholder( R.drawable.ic_account)
                 .apply( RequestOptions.circleCropTransform()).into(avatar);
-        nameInput.getEditText().addTextChangedListener(new TextWatcher () {
+        nameInput.addTextChangedListener(new TextWatcher () {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
@@ -80,15 +101,16 @@ public class AddPlayerActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.create)
+    @OnClick()
     void addPlayer() {
+
         Player player = new Player (
                 System.currentTimeMillis(),
-                nameInput.getEditText().getText().toString(),
+                nameInput.getText().toString (),
                 mPlayerImage,
-                addressInput.getEditText().getText().toString(),
-                phoneInput.getEditText().getText().toString(),
-                aboutMeInput.getEditText().getText().toString(),
+                addressInput.getText ().toString(),
+                phoneInput.getText ().toString(),
+                aboutMeInput.getText().toString(),
                 favorite
         );
         mApiService.createPlayer ( player );
